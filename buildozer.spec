@@ -38,8 +38,8 @@ android.minapi = 21
 # (str) Accept Android SDK licenses automatically
 android.accept_sdk_license = True
 
-# (str) Android NDK version to use (Sử dụng 25b để tương thích tốt với opencv/numpy)
-android.ndk = 25b
+# (str) Android NDK version to use (Để trống để Buildozer tương thích với môi trường runner)
+# android.ndk = 25b
 # -----------------------------------------------------------
 
 [buildozer]
