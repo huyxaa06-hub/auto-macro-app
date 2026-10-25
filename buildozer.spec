@@ -1,45 +1,22 @@
 [app]
 
-# (str) Title of your application
-title = Auto Macro App
+# Tên ứng dụng của bạn
+title = AutoGameLoader
+package.name = autogameloader
+package.domain = org.autogen
 
-# (str) Package name
-package.name = automacroapp
-
-# (str) Package domain (needed for android packaging)
-package.domain = org.huyxaa06
-
-# (str) Source directory where the application files are located
-source.dir = .
-
-# (list) Source files to include (let it empty to include all files)
+# Các file nguồn cần đưa vào APK (chứa app vỏ bọc loader_app.py)
 source.include_exts = py,png,jpg,kv,atlas
 
-# (list) Application requirements
-requirements = python3,kivy,opencv,numpy
+# Danh sách thư viện ĐÓNG GÓI SẴN vào bên trong APK (Bắt buộc phải có các dòng này)
+requirements = python3,kivy,requests,opencv-python,numpy
 
-# (str) Application versioning
-version = 0.1
-
-# (str) Supported orientations
-orientation = portrait
-
-# List of permissions
-android.permissions = INTERNET, WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE
-
-# (int) Target Android API
+# Phiên bản hướng tới của Android
 android.api = 33
-
-# (int) Minimum API your APK will support
 android.minapi = 21
 
-# (str) Accept Android SDK licenses automatically
-android.accept_sdk_license = True
+# Cấp quyền truy cập Internet để app có thể tải code từ GitHub về
+android.permissions = INTERNET
 
-# (str) Android NDK version to use
-android.ndk = 25b
-
-[buildozer]
-
-# (int) Log level (0 = error only, 1 = info, 2 = debug (with command output))
-log_level = 2
+# Hướng màn hình (portrait: dọc, landscape: ngang)
+orientation = portrait
