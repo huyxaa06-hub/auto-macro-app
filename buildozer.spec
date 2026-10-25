@@ -1,51 +1,42 @@
-name: CI Build APK
+[app]
 
-on:
-  push:
-    branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
+# (str) Title of your application
+title = Auto Macro App
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+# (str) Package name
+package.name = automacroapp
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+# (str) Package domain (needed for android packaging)
+package.domain = org.huyxaa06
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.10'
+# (str) Source directory where the application files are located
+source.dir = .
 
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y \
-            git zip unzip lzip libltdl-dev libffi-dev libssl-dev \
-            python3-pip python3-setuptools python3-dev \
-            build-essential ccache autoconf libtool pkg-config zlib1g-dev \
-            openjdk-17-jdk
+# (list) Source files to include (let it empty to include all files)
+source.include_exts = py,png,jpg,kv,atlas
 
-      - name: Install Buildozer and Cython
-        run: |
-          pip install --upgrade pip
-          pip install --upgrade Cython==0.29.36 buildozer
+# (list) Application requirements
+requirements = python3,kivy,opencv,numpy
 
-      - name: Build with Buildozer
-        run: |
-          buildozer -v android debug
-        env:
-          ANDROID_HOME: /usr/local/lib/android/sdk
-          ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
-          ANDROID_NDK_HOME: /usr/local/lib/android/sdk/ndk/27.3.13750724
-          ANDROIDNDK: /usr/local/lib/android/sdk/ndk/27.3.13750724
-          ANDROID_API: 33
-          ANDROID_MINAPI: 21
+# (str) Application versioning
+version = 0.1
 
-      - name: Upload APK artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: package
-          path: bin/*.apk
+# (str) Supported orientations
+orientation = portrait
+
+# List of permissions
+android.permissions = INTERNET, WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE
+
+# (int) Target Android API
+android.api = 33
+
+# (int) Minimum API your APK will support
+android.minapi = 21
+
+# (str) Accept Android SDK licenses automatically
+android.accept_sdk_license = True
+
+[buildozer]
+
+# (int) Log level (0 = error only, 1 = info, 2 = debug (with command output))
+log_level = 2
