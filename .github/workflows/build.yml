@@ -19,19 +19,23 @@ jobs:
         with:
           python-version: '3.10'
 
-      # Cài đặt các gói hệ thống bắt buộc cho Buildozer/Cython trước khi build
-      - name: Install system dependencies
+      - name: Install dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y \
             git zip unzip lzip libltdl-dev libffi-dev libssl-dev \
             python3-pip python3-setuptools python3-dev \
-            build-essential ccache autoconf libtool pkg-config zlib1g-dev
+            build-essential ccache autoconf libtool pkg-config zlib1g-dev \
+            openjdk-17-jdk
+
+      - name: Install Buildozer and Cython
+        run: |
+          pip install --upgrade pip
+          pip install --upgrade Cython==0.29.36 buildozer
 
       - name: Build with Buildozer
-        uses: ArtemSBulgakov/buildozer-action@v1
-        with:
-          command: android debug
+        run: |
+          buildozer -v android debug
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
