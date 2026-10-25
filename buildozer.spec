@@ -28,6 +28,17 @@ orientation = portrait
 # List of permissions
 android.permissions = INTERNET, WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE
 
+# --- CẤU HÌNH BỔ SUNG ĐỂ TRÁNH LỖI LICENSE & BUILD-TOOLS ---
+# (int) Target Android API
+android.api = 33
+
+# (int) Minimum API your APK will support
+android.minapi = 21
+
+# (str) Accept Android SDK licenses automatically
+android.accept_sdk_license = True
+# -----------------------------------------------------------
+
 [buildozer]
 
 # (int) Log level (0 = error only, 1 = info, 2 = debug (with command output))
