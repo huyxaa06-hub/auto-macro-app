@@ -38,7 +38,7 @@ android.minapi = 21
 # (str) Accept Android SDK licenses automatically
 android.accept_sdk_license = True
 
-# (str) Android NDK version to use (Để trống để Buildozer tương thích với môi trường runner)
+# (str) Android NDK version to use (Để trống để Buildozer tự động liên kết với NDK chuẩn trên GitHub Actions)
 # android.ndk = 25b
 # -----------------------------------------------------------
 
