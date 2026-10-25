@@ -33,15 +33,22 @@ jobs:
           pip install --upgrade pip
           pip install --upgrade Cython==0.29.36 buildozer
 
+      - name: Force compatible Android NDK
+        run: |
+          # Xóa NDK mặc định gây lỗi và tải bản NDK r25b tương thích tuyệt đối với python-for-android
+          rm -rf /usr/local/lib/android/sdk/ndk/*
+          wget -q https://dl.google.com/android/repository/android-ndk-r25b-linux.zip
+          unzip -q android-ndk-r25b-linux.zip -d /usr/local/lib/android/sdk/ndk/
+          mv /usr/local/lib/android/sdk/ndk/android-ndk-r25b /usr/local/lib/android/sdk/ndk/25.2.9519653
+
       - name: Build with Buildozer
         run: |
-          export ANDROIDNDK_DIR="/usr/local/lib/android/sdk/ndk/27.3.13750724"
           buildozer -v android debug
         env:
           ANDROID_HOME: /usr/local/lib/android/sdk
           ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
-          ANDROID_NDK_HOME: /usr/local/lib/android/sdk/ndk/27.3.13750724
-          ANDROIDNDK: /usr/local/lib/android/sdk/ndk/27.3.13750724
+          ANDROID_NDK_HOME: /usr/local/lib/android/sdk/ndk/25.2.9519653
+          ANDROIDNDK: /usr/local/lib/android/sdk/ndk/25.2.9519653
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
